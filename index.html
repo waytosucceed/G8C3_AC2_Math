@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class Activity 3</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="wts.css">
+  <link rel="icon" type="image/x-icon" href="Logo_last.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+MX:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <audio id="cheers" >
+    <source src="cheers.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="points" src="Points.mp3"></audio>
+  <audio id="fail" src="fail.mp3"></audio>
+  <div class="header" style="width:100%; box-shadow:5px 5px 10px rgb(0, 0, 0); padding-bottom:10px;">
+    <img src="Logo.png" width="5%" style="float:left; margin-top:25px;" class="img-responsive">
+    <span> <img src="header.png" width="30%" height="100px" class="img-responsive"></span>
+</div>
+<br>
+<br>
+  <center>
+  <h1 id="heading">Fractions</h1>
+  <div class="container">
+
+    <button onclick="abc(1)" class="smallbtn">Q1</button>
+    <button onclick="abc(2)" class="smallbtn">Q2</button>
+    <button onclick="abc(3)" class="smallbtn">Q3</button>
+    <button onclick="abc(4)" class="smallbtn">Q4</button>
+    <button onclick="abc(5)" class="smallbtn">Q5</button>
+
+
+    </div>
+  <div class="maindiv container">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 " tyle='font-size:25px; color:black; font-family:Georgia;'>
+      <p id="numdiv"></p>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 imgdiv">
+      <img id ="math_ques" src="MAth Question.jpg" width="100%">
+    </div>
+  <div id="questiondiv" class="col-lg-7 col-md-7 col-sm-7 col-xs-8">
+    <div id="question"></div>
+    <br>
+  <div class="menu" id="menu1"><br><ul id="options"></ul></div>
+  <button id="subbtn" class="btn btn-success" onclick="checkAnswer()">Submit Answer</button>
+  <button id="nextbtn" class="btn btn-primary" onclick="newques()" style="display:none">Next</button>
+  <p id="result"></p>
+  </div>
+</div>
+  <script>
+    // Define an array of questions and their options
+    
+    var questions = [
+    
+    {
+      questionNo: "Q1.",
+      question: " Lowell requires all dogs to be registered with the city and keeps records of the distribution of different breeds.<br>What fraction of dogs registered with the city are Beagles?",
+      options: ["a. 5/299", "b. 5/289", "c. 40/299", "d. 40/289"],
+      answer: "d. 40/289"
+    },
+
+    {
+      questionNo: "Q2.",
+      question: " A puzzle book company polled its readers about their favourite type of puzzles.<br>What fraction of respondents preferred acrostics?",
+      options: ["a. 5/12", "b. 6/12", "c. 1/12", "d. 2/12"],
+      answer: "a. 5/12"
+    },
+
+    {
+      questionNo: "Q3.",
+      question: "A survey asked office workers what they like to do when taking a break from work.<br>What simplified fraction of the respondents preferred checking personal e-mail?",
+      options: ["a. 57/365", "b. 58/364", "c. 58/365", "d. 57/364"],
+      answer: "c. 58/365"
+    },
+
+    
+    {
+      questionNo: "Q4.",
+      question: "A law firm in Burlington kept track of how many hours were billed by each partner last year.<br>What fraction of the hours were billed by Annie?",
+
+      options: ["a. 58/184", "b. 56/183", "c. 59/184", "d. 59/183"],
+      answer: "c. 59/184"
+    },
+
+    {
+      questionNo: "Q5.",
+      question: "A real estate agent evaluated the number of houses sold this year in each town in Hancock County.<br>What simplified fraction of houses sold in Hancock County were in Summerfield?",
+
+      options: ["a. 27/103","b. 27/102","c. 27/104","d. 26/103"],
+      answer: "a. 27/103"
+    },
+
+    
+      
+      
+      // Add more questions here
+    ];
+
+    //define the array of images
+
+    var img= ["assets/1.jpg","assets/2.jpg","assets/3.jpg","assets/4.jpg","assets/5.jpg"]
+    
+    // Get a random question from the array
+    randomQuestion = questions[i];    
+    var randomQuestion = questions[0];
+    var updatedimage = img[0]
+    document.getElementById("numdiv").innerHTML = randomQuestion.questionNo;
+    document.getElementById("math_ques").src = updatedimage
+  
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+
+// Create a function here like family array project of Byjus to display next question \
+    // from array everytime instead of random question
+    var i=1;
+    var count=questions.length
+    function newques(){
+      if(i==count){
+        document.getElementById("heading").innerHTML = "<b>Well Done</b>"
+        document.getElementById("math_ques").src = "last.jpg"
+        document.getElementById("question").innerHTML=""
+        document.getElementById("menu1").style.backgroundColor="white"
+        document.getElementById("numdiv").style.display='none'
+        document.getElementById("options").innerHTML="<b>😎 You Are Smart!!</b>"
+        document.getElementById("cheers").play()
+        document.getElementById("result").innerHTML =""
+      document.getElementById("nextbtn").style.display="none"
+      }
+      else{
+
+      document.getElementById("options").innerHTML=""
+      document.getElementById("result").innerHTML =""
+
+      randomQuestion = questions[i]; 
+      document.getElementById("numdiv").innerHTML = randomQuestion.questionNo;
+  
+      updatedimage= img[i]
+      document.getElementById("math_ques").src = updatedimage
+
+// Display the question and options on the page
+      randomQuestion = questions[i];    
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+    document.getElementById("subbtn").style.display="inline-block"
+        document.getElementById("nextbtn").style.display="none"
+
+    i++;
+    }
+  }
+    
+    
+    // Check the selected answer against the correct answer
+    function checkAnswer() {
+      var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+      if (selectedAnswer === randomQuestion.answer) {
+        document.getElementById("result").innerHTML = "Good Job! &#128512" ;
+        document.getElementById("points").play();
+        document.getElementById("subbtn").style.display="none"
+        document.getElementById("nextbtn").style.display="inline-block"
+      } else {
+        document.getElementById("result").innerHTML = "Try Again 😎!";
+        document.getElementById("fail").play();
+      }
+    }
+
+     
+    function abc(x){
+      i=x-1
+      document.getElementById("options").innerHTML=""
+      document.getElementById("result").innerHTML =""
+      
+  
+      updatedimage= img[i]
+      document.getElementById("math_ques").src = updatedimage
+
+// Display the question and options on the page
+      randomQuestion = questions[i];    
+      document.getElementById("numdiv").innerHTML = randomQuestion.questionNo;
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+    document.getElementById("subbtn").style.display="inline-block"
+        document.getElementById("nextbtn").style.display="none"
+
+    i++;
+    }
+  </script>
+</center>
+</body>
+</html>
